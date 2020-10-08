@@ -27,7 +27,7 @@
 ## 🏗️ Installation
 
 1. Install a UserScripts Manager in your browser.
-2. Click **[here](https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js)**.
+2. Click **[here](https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js)** or Copy GetDLCListFromSteamDB.user.js code and paste in yor UserScript Manager.
 3. Done.
 
 </br>
