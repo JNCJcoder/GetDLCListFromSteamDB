@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        DrawciaMage
-// @version       1.0.0
+// @version       1.0.1
 // @homepageURL   https://github.com/drawciamage/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -12,11 +12,11 @@
 
 class Main {
   constructor() {
-    this.Modal = document.createElement("div");
-    this.Button = document.createElement("a");
-    this.Selected = null;
-    this.TextArea = null;
-    this.dlc = [];
+    this.modal = document.createElement("div");
+    this.button = document.createElement("a");
+    this.selected = null;
+    this.textArea = null;
+    this.dlcs = [];
 
     this.CreateStyle();
     this.CreateButton();
@@ -103,19 +103,19 @@ class Main {
   }
 
   CreateButton() {
-    this.Button.setAttribute("class", "btn btn-primary btn-fixed");
-    this.Button.innerHTML =
+    this.button.setAttribute("class", "btn btn-primary btn-fixed");
+    this.button.innerHTML =
       `<svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-package" aria-hidden="true">
           <path fill-rule="evenodd" d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
           </path>
         </svg> Get DLC List from SteamDB`;
 
-    document.body.appendChild(this.Button);
+    document.body.appendChild(this.button);
   }
 
   CreateModal() {
-    this.Modal.setAttribute("class", "modal-wrapper");
-    this.Modal.innerHTML = `<div class="modal">
+    this.modal.setAttribute("class", "modal-wrapper");
+    this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" id="modal-close">X</a>
       <div class="modal-header">
         <h3>Get DLC List from SteamDB <b>v1.0.0</b> <small>by DrawciaMage</small></h3>
@@ -137,22 +137,22 @@ class Main {
     </div>
     </div>`;
 
-    document.body.appendChild(this.Modal);
-    this.TextArea = document.getElementById("DLCList");
-    this.Selected = document.getElementById("selectList");
+    document.body.appendChild(this.modal);
+    this.textArea = document.getElementById("DLCList");
+    this.selected = document.getElementById("selectList");
   }
 
   CreateEventListener() {
-    this.Button.addEventListener("click", () => {
-      this.Modal.style.display = "block";
-      this.Button.style.display = "none";
+    this.button.addEventListener("click", () => {
+      this.modal.style.display = "block";
+      this.button.style.display = "none";
     });
 
     document.addEventListener("click", (event) => {
       switch (event.target.id) {
         case "modal-close":
-          this.Modal.style.display = "none";
-          this.Button.style.display = "block";
+          this.modal.style.display = "none";
+          this.button.style.display = "block";
           break;
 
         case "GetList":
@@ -161,7 +161,7 @@ class Main {
           break;
 
         case "CopyText":
-          this.TextArea.select();
+          this.textArea.select();
           document.execCommand("copy");
           break;
 
@@ -172,59 +172,59 @@ class Main {
   }
 
   PopulateDLCList() {
-    if (this.dlc.length !== 0) return;
+    if (this.dlcs.length !== 0) return;
 
-    const DLCTable = document.querySelectorAll(".app");
+    const dlcTable = document.querySelectorAll(".app");
 
-    for (let index = 0; index < DLCTable.length; index++) {
-      const [AppID, unformedName] = DLCTable[index].innerText.split("\t");
+    for (let index = 0; index < dlcTable.length; index++) {
+      const [appID, unformedName] = dlcTable[index].innerText.split("\t");
 
       if (!unformedName) continue;
 
-      const Name = unformedName.split("\n")[1] || unformedName.split("\n")[0];
+      const name = unformedName.split("\n")[1] || unformedName.split("\n")[0];
 
-      this.dlc.push({ AppID, Name });
+      this.dlcs.push({ appID, name });
     }
   }
 
   GetList() {
-    this.TextArea.value = "";
+    this.textArea.value = "";
 
-    switch (this.Selected.value) {
+    switch (this.selected.value) {
       case "CreamAPI":
-        this.dlc.map((DLC) => {
-          this.TextArea.value = this.TextArea.value + DLC.AppID + " = " +
-            DLC.Name + "\n";
+        this.dlcs.map((dlc) => {
+          this.textArea.value = this.textArea.value + dlc.appID + " = " +
+            dlc.name + "\n";
         });
         break;
 
       case "SKIDROW":
-        this.dlc.map((DLC) => {
-          this.TextArea.value = this.TextArea.value + "; " + DLC.Name + "\n" +
-            DLC.AppID + "\n";
+        this.dlcs.map((dlc) => {
+          this.textArea.value = this.textArea.value + "; " + dlc.name + "\n" +
+            dlc.appID + "\n";
         });
         break;
 
       case "3DMGAME":
-        this.dlc.map((DLC, index) => {
+        this.dlcs.map((dlc, index) => {
           const newIndex = index + 1;
-          this.TextArea.value = this.TextArea.value + "; " + DLC.Name + "\n" +
-            "DLC00" + newIndex + " = " + DLC.AppID + "\n";
+          this.textArea.value = this.textArea.value + "; " + dlc.name + "\n" +
+            "DLC00" + newIndex + " = " + dlc.appID + "\n";
         });
         break;
 
       case "CODEX":
-        this.dlc.map((DLC, index) => {
-          this.TextArea.value = this.TextArea.value + "DLC0000" + index +
-            " = " + DLC.AppID + "\n" + "DLCName0000" + index + " = " +
-            DLC.Name + "\n";
+        this.dlcs.map((dlc, index) => {
+          this.textArea.value = this.textArea.value + "DLC0000" + index +
+            " = " + dlc.appID + "\n" + "DLCName0000" + index + " = " +
+            dlc.name + "\n";
         });
         break;
 
       case "LUMAEMU":
-        this.dlc.map((DLC) => {
-          this.TextArea.value = this.TextArea.value + "; " + DLC.Name + "\n" +
-            "DLC_" + DLC.AppID + " = 1" + "\n";
+        this.dlcs.map((dlc) => {
+          this.textArea.value = this.textArea.value + "; " + dlc.name + "\n" +
+            "DLC_" + dlc.appID + " = 1" + "\n";
         });
         break;
 
