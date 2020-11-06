@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        DrawciaMage
-// @version       1.0.1
+// @version       1.0.2
 // @homepageURL   https://github.com/drawciamage/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -118,7 +118,7 @@ class Main {
     this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" id="modal-close">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.0</b> <small>by DrawciaMage</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.2</b> <small>by DrawciaMage</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
@@ -188,49 +188,34 @@ class Main {
   }
 
   GetList() {
-    this.textArea.value = "";
+    let dlcMethod;
 
     switch (this.selected.value) {
       case "CreamAPI":
-        this.dlcs.map((dlc) => {
-          this.textArea.value = this.textArea.value + dlc.appID + " = " +
-            dlc.name + "\n";
-        });
+        dlcMethod = (accumulator, dlc) => `${accumulator}${dlc.appID} = ${dlc.name}\n`;
         break;
 
       case "SKIDROW":
-        this.dlcs.map((dlc) => {
-          this.textArea.value = this.textArea.value + "; " + dlc.name + "\n" +
-            dlc.appID + "\n";
-        });
+        dlcMethod = (accumulator, dlc) => `${accumulator}; ${dlc.name}\n${dlc.appID}\n`;
         break;
 
       case "3DMGAME":
-        this.dlcs.map((dlc, index) => {
-          const newIndex = index + 1;
-          this.textArea.value = this.textArea.value + "; " + dlc.name + "\n" +
-            "DLC00" + newIndex + " = " + dlc.appID + "\n";
-        });
+        dlcMethod = (accumulator, dlc, index) => `${accumulator}; ${dlc.name}\nDLC00${index + 1} = ${dlc.appID}\n`;
         break;
 
       case "CODEX":
-        this.dlcs.map((dlc, index) => {
-          this.textArea.value = this.textArea.value + "DLC0000" + index +
-            " = " + dlc.appID + "\n" + "DLCName0000" + index + " = " +
-            dlc.name + "\n";
-        });
+        dlcMethod = (accumulator, dlc, index) => `${accumulator}DLC0000${index} = ${dlc.appID}\nDLCName0000${index} = ${dlc.name}\n`;
         break;
 
       case "LUMAEMU":
-        this.dlcs.map((dlc) => {
-          this.textArea.value = this.textArea.value + "; " + dlc.name + "\n" +
-            "DLC_" + dlc.appID + " = 1" + "\n";
-        });
+        dlcMethod = (accumulator, dlc) => `${accumulator}; ${dlc.name}\nDLC_${dlc.appID} = 1\n`;
         break;
 
       default:
-        break;
+        return;
     }
+
+    this.textArea.value = this.dlcs.reduce(dlcMethod, "");
   }
 }
 
