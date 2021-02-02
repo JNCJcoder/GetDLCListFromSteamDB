@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        DrawciaMage
-// @version       1.0.2
+// @version       1.0.3
 // @homepageURL   https://github.com/drawciamage/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -99,7 +99,7 @@ class Main {
     resize: none;
   }`;
 
-    document.getElementsByTagName("head")[0].appendChild(style);
+    document.head.appendChild(style);
   }
 
   CreateButton() {
