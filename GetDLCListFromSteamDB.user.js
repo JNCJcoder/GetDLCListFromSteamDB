@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        DrawciaMage
-// @version       1.0.3
+// @version       1.0.4
 // @homepageURL   https://github.com/drawciamage/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -118,7 +118,7 @@ class Main {
     this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" id="modal-close">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.2</b> <small>by DrawciaMage</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.4</b> <small>by DrawciaMage</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
@@ -174,17 +174,16 @@ class Main {
   PopulateDLCList() {
     if (this.dlcs.length !== 0) return;
 
-    const dlcTable = document.querySelectorAll(".app");
+    const dlcTable = [...document.getElementsByClassName("app")]
+      .filter(dlc => !dlc.textContent.includes("SteamDB"))
+      .filter(dlc => !dlc.href)
+      .map(dlc => {
+        const [ appID, name ] = dlc.textContent.split("\n").filter(Boolean);
+        
+        return { appID, name };
+      });
 
-    for (let index = 0; index < dlcTable.length; index++) {
-      const [appID, unformedName] = dlcTable[index].innerText.split("\t");
-
-      if (!unformedName) continue;
-
-      const name = unformedName.split("\n")[1] || unformedName.split("\n")[0];
-
-      this.dlcs.push({ appID, name });
-    }
+    this.dlcs = dlcTable;
   }
 
   GetList() {
