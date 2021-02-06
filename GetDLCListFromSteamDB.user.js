@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        DrawciaMage
-// @version       1.0.4
+// @version       1.0.5
 // @homepageURL   https://github.com/drawciamage/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -31,8 +31,7 @@ class Main {
   .btn-fixed {
     position: fixed;
     bottom: 0;
-    right: 0;
-    margin-right: 10px;
+    right: 10px;
     z-index: 4;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -118,7 +117,7 @@ class Main {
     this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" id="modal-close">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.4</b> <small>by DrawciaMage</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.5</b> <small>by DrawciaMage</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
