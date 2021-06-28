@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
-// @author        DrawciaMage
-// @version       1.0.5
-// @homepageURL   https://github.com/drawciamage/GetDLCListFromSteamDB/
-// @updateURL     https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
-// @downloadURL   https://github.com/drawciamage/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
+// @author        JNCJcoder
+// @version       1.0.6
+// @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
+// @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
+// @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @match         *://steamdb.info/app/*
 // @run-at        document-end
 // ==/UserScript==
