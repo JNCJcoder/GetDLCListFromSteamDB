@@ -117,7 +117,7 @@ class Main {
     this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" id="modal-close">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.7</b> <small>by DrawciaMage</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.7</b> <small>by JNCJcoder</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
