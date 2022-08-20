@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        JNCJcoder
-// @version       1.0.8
+// @version       1.0.9
 // @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -117,7 +117,7 @@ class Main {
     this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" id="modal-close">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.8</b> <small>by JNCJcoder</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.9</b> <small>by JNCJcoder</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
@@ -185,34 +185,15 @@ class Main {
   }
 
   GetList() {
-    let dlcMethod;
-
-    switch (this.selected.value) {
-      case "CreamAPI":
-        dlcMethod = (accumulator, dlc) => `${accumulator}${dlc.appID} = ${dlc.name}\n`;
-        break;
-
-      case "SKIDROW":
-        dlcMethod = (accumulator, dlc) => `${accumulator}; ${dlc.name}\n${dlc.appID}\n`;
-        break;
-
-      case "3DMGAME":
-        dlcMethod = (accumulator, dlc, index) => `${accumulator}; ${dlc.name}\nDLC00${index + 1} = ${dlc.appID}\n`;
-        break;
-
-      case "CODEX":
-        dlcMethod = (accumulator, dlc, index) => `${accumulator}DLC0000${index} = ${dlc.appID}\nDLCName0000${index} = ${dlc.name}\n`;
-        break;
-
-      case "LUMAEMU":
-        dlcMethod = (accumulator, dlc) => `${accumulator}; ${dlc.name}\nDLC_${dlc.appID} = 1\n`;
-        break;
-
-      default:
-        return;
+    const formatList = {
+      "CreamAPI": (accumulator, dlc) => `${accumulator}${dlc.appID} = ${dlc.name}\n`,
+      "SKIDROW": (accumulator, dlc) => `${accumulator}; ${dlc.name}\n${dlc.appID}\n`,
+      "3DMGAME": (accumulator, dlc, index) => `${accumulator}; ${dlc.name}\nDLC00${index + 1} = ${dlc.appID}\n`,
+      "CODEX": (accumulator, dlc, index) => `${accumulator}DLC0000${index} = ${dlc.appID}\nDLCName0000${index} = ${dlc.name}\n`,
+      "LUMAEMU": (accumulator, dlc) => `${accumulator}; ${dlc.name}\nDLC_${dlc.appID} = 1\n`
     }
 
-    this.textArea.value = this.dlcs.reduce(dlcMethod, "");
+    this.textArea.value = this.dlcs.reduce(formatList[this.selected.value], "");
   }
 }
 
