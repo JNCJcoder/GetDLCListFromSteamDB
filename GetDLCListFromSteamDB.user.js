@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        JNCJcoder
-// @version       1.0.7
+// @version       1.0.8
 // @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
