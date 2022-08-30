@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        JNCJcoder
-// @version       1.0.10
+// @version       1.0.11
 // @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -48,6 +48,11 @@ class Main {
     height: 100%;
     z-index: 4;
     background: rgba(0, 0, 0, .75);
+  }
+
+  .modal-wrapper:target
+  {
+    display: block;
   }
 
   .modal {
@@ -103,6 +108,7 @@ class Main {
 
   CreateButton() {
     this.button.setAttribute("class", "btn btn-primary btn-fixed");
+    this.button.setAttribute("href", "#openModal");
     this.button.innerHTML =
       `<svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-package" aria-hidden="true">
           <path fill-rule="evenodd" d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
@@ -114,10 +120,11 @@ class Main {
 
   CreateModal() {
     this.modal.setAttribute("class", "modal-wrapper");
+    this.modal.setAttribute('id', "openModal");
     this.modal.innerHTML = `<div class="modal">
-      <a class="btn modal-close" id="modal-close">X</a>
+      <a class="btn modal-close" href="#">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.10</b> <small>by JNCJcoder</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.11</b> <small>by JNCJcoder</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
@@ -142,18 +149,8 @@ class Main {
   }
 
   CreateEventListener() {
-    this.button.addEventListener("click", () => {
-      this.modal.style.display = "block";
-      this.button.style.display = "none";
-    });
-
     document.addEventListener("click", (event) => {
       switch (event.target.id) {
-        case "modal-close":
-          this.modal.style.display = "none";
-          this.button.style.display = "block";
-          break;
-
         case "GetList":
           this.PopulateDLCList();
           this.GetList();
