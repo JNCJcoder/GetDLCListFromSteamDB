@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        JNCJcoder
-// @version       1.0.11
+// @version       1.0.12
 // @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -170,7 +170,10 @@ class Main {
   PopulateDLCList() {
     if (this.dlcs.length !== 0) return;
 
-    const dlcTable = [...document.getElementsByClassName("app")]
+    const appTable = [...document.getElementsByClassName("app")];
+    appTable.shift();
+
+    const dlcTable = appTable
       .filter(dlc => !(dlc.href || dlc.textContent.includes("SteamDB")))
       .map(dlc => {
         const [ appID, name ] = dlc.innerText.split("\t");
