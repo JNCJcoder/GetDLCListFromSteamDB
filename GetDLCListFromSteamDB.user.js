@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        JNCJcoder
-// @version       1.0.12
+// @version       1.0.13
 // @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -124,7 +124,7 @@ class Main {
     this.modal.innerHTML = `<div class="modal">
       <a class="btn modal-close" href="#">X</a>
       <div class="modal-header">
-        <h3>Get DLC List from SteamDB <b>v1.0.12</b> <small>by JNCJcoder</small></h3>
+        <h3>Get DLC List from SteamDB <b>v1.0.13</b> <small>by JNCJcoder</small></h3>
       </div>
       <div class="modal-content">
         <select id="selectList">
@@ -176,7 +176,8 @@ class Main {
     const dlcTable = appTable
       .filter(dlc => !(dlc.href || dlc.textContent.includes("SteamDB")))
       .map(dlc => {
-        const [ appID, name ] = dlc.innerText.split("\t");
+        const appID = dlc.childNodes[1].textContent;
+        const name = dlc.childNodes[3].textContent;
         
         return { appID, name };
       });

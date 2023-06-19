@@ -34,9 +34,7 @@
 
 ## 💻 Usage
 
-> 🚩 Only work in /dlc page.
-
-1. Go to https://steamdb.info/app/945360/dlc for example.
+1. Go to https://steamdb.info/app/945360 for example.
 2. Click on Green Button "Get DLC List from SteamDB".
 
 </br>
