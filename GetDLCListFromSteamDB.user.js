@@ -2,7 +2,7 @@
 // @name          Get DLC List from SteamDB
 // @description   Get DLC List from SteamDB
 // @author        JNCJcoder
-// @version       1.0.15
+// @version       1.0.16
 // @homepageURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/
 // @updateURL     https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
 // @downloadURL   https://github.com/JNCJcoder/GetDLCListFromSteamDB/raw/master/GetDLCListFromSteamDB.user.js
@@ -29,8 +29,7 @@ class Main
     CreateStyle()
     {
         const style = document.createElement("style");
-        style.type = "text/css";
-        style.innerHTML = `/* Button */
+        style.textContent = `/* Button */
             .btn-fixed {
               position: fixed;
               bottom: 0;
@@ -129,7 +128,7 @@ class Main
         this.modal.innerHTML = `<div class="modal">
           <a class="btn modal-close" href="#">X</a>
           <div class="modal-header">
-            <h3>Get DLC List from SteamDB <b>v1.0.15</b> <small>by JNCJcoder</small></h3>
+            <h3>Get DLC List from SteamDB <b>v1.0.16</b> <small>by JNCJcoder</small></h3>
           </div>
           <div class="modal-content">
             <select id="selectList">
